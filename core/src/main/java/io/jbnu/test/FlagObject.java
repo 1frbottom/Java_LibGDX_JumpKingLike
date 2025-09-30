@@ -1,46 +1,42 @@
 package io.jbnu.test;
 
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class CoinObject {
 
-    public static int Width = 90;
-    public static int Height = 72;
+
+
+public class FlagObject {
+    public static int Width = 100;
+    public static int Height = 100;
 
     public Vector2 position;
-    public Vector2 velocity;
+
     public Sprite sprite;
 
-    // 충돌 판정을 위한 사각 영역
     public Rectangle bounds;
 
-
-    public CoinObject(Texture texture, float startX, float startY, float speed) {
-        this.position = new Vector2(startX, startY);
-        this.velocity = new Vector2(0, speed); // 아래로만 떨어지므로 Y 속도만 가짐
+    public FlagObject(Texture texture, float startX, float startY) {
 
         this.sprite = new Sprite(texture);
+
         this.sprite.setSize(Width, Height);
+
+        this.position = new Vector2(startX, startY);
         this.sprite.setPosition(position.x, position.y);
 
-        // 충돌 영역 초기화
         this.bounds = new Rectangle(position.x, position.y, sprite.getWidth(), sprite.getHeight());
 
 
     }
 
-    /**
-     * 매 프레임 업데이트
-     */
     public void update(float delta) {
-        // 위치 업데이트
-        position.y += velocity.y * delta;
+        position.y = 0;
 
-        // 스프라이트와 충돌 영역 위치 동기화
         sprite.setPosition(position.x, position.y);
         bounds.setPosition(position.x, position.y);
 
@@ -50,4 +46,7 @@ public class CoinObject {
         sprite.draw(batch);
 
     }
+
+
+
 }

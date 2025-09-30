@@ -9,6 +9,7 @@ public class GameCharacter {
     // --- 1. 상태 (데이터) ---
     public Vector2 position; // 위치
     public Vector2 velocity; // 속도
+    public final float MOVE_SPEED = 350.0f;
     // --- 2. 그래픽 (데이터) ---
     public Sprite sprite;    // 그리기용 스프라이트
     public boolean isGrounded = false; // '땅에 닿아있는가?' (점프 가능 여부)
@@ -37,10 +38,10 @@ public class GameCharacter {
 
     // --- 3. 행동 (메서드) ---
     public void moveRight() {
-        position.x += 7;
+        velocity.x = MOVE_SPEED;
     }
     public void moveLeft() {
-        position.x -= 7;
+        velocity.x = -MOVE_SPEED;
     }
 
     public void syncSpriteToPosition() {
@@ -52,5 +53,8 @@ public class GameCharacter {
      */
     public void draw(SpriteBatch batch) {
         sprite.draw(batch);
+
     }
+
+
 }
