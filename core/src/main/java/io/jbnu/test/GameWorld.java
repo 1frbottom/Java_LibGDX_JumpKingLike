@@ -34,8 +34,8 @@ public class GameWorld {
 
     private Array<BlockObject> blocks;
 
-
-
+    private FlagObject flag;
+    boolean bIsFlagOn;
 
 
 
@@ -59,6 +59,12 @@ public class GameWorld {
         // BlockObject
         blocks = new Array<>();
         loadGround(5);
+
+        // FlagObject
+        flag = new FlagObject(this.flagTexture, 700, 0);
+        bIsFlagOn = false;
+
+
     }
 
 
@@ -132,7 +138,6 @@ public class GameWorld {
             player.isGrounded = true; // '땅에 닿음' 상태로 변경
         }
 
-
         updateSpawning(delta);
         checkCollisions();
 
@@ -142,7 +147,6 @@ public class GameWorld {
 
         // --- 6. 그래픽 동기화 ---
         player.syncSpriteToPosition();
-
 
     }
 
@@ -183,6 +187,15 @@ public class GameWorld {
             }
         }
 
+        // FlagObject
+        if (player.sprite.getBoundingRectangle().overlaps(flag.bounds))
+        {
+            Main.effectSound.play();
+            bIsFlagOn = true;
+        }
+
+
+
     }
 
     private void loadGround(int blockNum){
@@ -208,20 +221,6 @@ public class GameWorld {
 
 
 
-
-
-    public int getScore() {
-        return score;
-    }
-
-    public Array<CoinObject> getCoins() {
-        return coins;
-    }
-
-    public Array<BlockObject> getBlocks() {
-        return blocks;
-    }
-
     // GameScreen으로부터 '점프' 입력을 받음
     public void onPlayerJump() {
         player.jump();
@@ -239,5 +238,33 @@ public class GameWorld {
     public GameCharacter getPlayer() {
         return player;
     }
+
+
+
+
+    public int getScore() {
+        return score;
+    }
+
+    public Array<CoinObject> getCoins() {
+        return coins;
+    }
+
+    public Array<BlockObject> getBlocks() {
+        return blocks;
+    }
+
+    public FlagObject getFlag()
+    {
+        return flag;
+    }
+
+    public boolean getbIsGameClear()
+    {
+        return bIsFlagOn;
+    }
+
+
+
 
 }

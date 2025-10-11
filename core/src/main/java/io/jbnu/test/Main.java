@@ -19,8 +19,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
 
-    private OrthographicCamera camera;
-    private Viewport viewport;
+    private CameraManager cameraManager;
 
     private GameState currentState;
 
@@ -64,9 +63,9 @@ public class Main extends ApplicationAdapter {
         scoreFont = new BitmapFont(); // 기본 비트맵 폰트 생성
         scoreFont.getData().setScale(2);
 
-        camera = new OrthographicCamera();
-        //camera.setToOrtho(false, 800, 600);   // is this line needed?
-        viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+        cameraManager = new CameraManager(WORLD_WIDTH, WORLD_HEIGHT);
+
+
 
     }
 
@@ -75,40 +74,70 @@ public class Main extends ApplicationAdapter {
         ScreenUtils.clear(1f, 1f, 1f, 1f);
 
         input();
-        logic();
-        draw();
 
+        gameEndCheck();
+
+        logic();
+
+        draw();
 
     }
 
     public enum GameState {
         RUNNING,
-        PAUSED
+        PAUSED,
+        CLEARED
+
+    }
+
+    private void gameEndCheck() {
+        if (world.getbIsGameClear() && (currentState != GameState.CLEARED))
+        {
+            currentState = GameState.CLEARED;
+            startCameraEffect();
+        }
+
+    }
+
+    private void startCameraEffect() {
+        cameraManager.startShake(1.0f, 30.0f);
 
 
     }
 
     private void logic(){
 
-        if (currentState == GameState.RUNNING) {
+        if (currentState == GameState.RUNNING)
+        {
             world.update(Gdx.graphics.getDeltaTime());
 
-            if (world.getScore() >= 10) {
+            cameraManager.update(Gdx.graphics.getDeltaTime());
+
+            if (world.getScore() >= 10)
+            {
                 StageLevel++;
 
                 world = new GameWorld(StageLevel, playerTexture, coinTexture, blockTexture, flagTexture, this.WORLD_WIDTH, this.WORLD_HEIGHT);
 
-
             }
-        }
 
+        }
+        else if(currentState == GameState.CLEARED)
+        {
+            updateEffect(Gdx.graphics.getDeltaTime());
+
+        }
 
 
     }
 
+    private void updateEffect(float delta)
+    {
+        cameraManager.updateShake(delta);
+    }
+
     private void draw(){
-        camera.update();
-        batch.setProjectionMatrix(viewport.getCamera().combined);
+        batch.setProjectionMatrix(cameraManager.getCamera().combined);
 
         batch.begin();
         //
@@ -120,6 +149,8 @@ public class Main extends ApplicationAdapter {
 
         for (BlockObject b : world.getBlocks())
             b.draw(batch);
+
+        world.getFlag().draw(batch);
 
         scoreFont.draw(batch, "Stage " + StageLevel, 20, WORLD_HEIGHT - 20);
         scoreFont.draw(batch, "-score: " + world.getScore(), 20, WORLD_HEIGHT - 55);
@@ -181,7 +212,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height, true);
+        cameraManager.resize(width, height);
 
 
     }
