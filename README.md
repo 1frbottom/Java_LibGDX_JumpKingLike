@@ -11,7 +11,7 @@
 
 - [간단 기술문서 링크](https://github.com/user-attachments/files/24400213/asdfsdaf.pdf)
 
-- License & Copyright
+## License & Copyright
 This project is for educational and portfolio purposes only.
 * The character animation used in this project is the property of **©SNK CORPORATION** (Metal Slug series).
 * No copyright infringement is intended.
