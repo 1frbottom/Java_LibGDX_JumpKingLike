@@ -5,11 +5,11 @@
 ## 2025.10.23 ~ 2025.11.02, 1인개발
 
 ## 기술 문서
-	- 아래 링크 클릭시 pdf가 즉시 다운로드됩니다.
- 	- [간단 기술문서 링크](https://github.com/user-attachments/files/24400213/asdfsdaf.pdf)
+- 아래 링크 클릭시 pdf가 즉시 다운로드됩니다.
+- [간단 기술문서 링크](https://github.com/user-attachments/files/24400213/asdfsdaf.pdf)
 
 ## 프리뷰
-	- [유튜브 링크](https://www.youtube.com/watch?v=ueHWaKd566g)
+- [유튜브 링크](https://www.youtube.com/watch?v=ueHWaKd566g)
 
 ## IDE는 Android Studio 사용, assets/*는 별도보관
 
