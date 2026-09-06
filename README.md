@@ -7,9 +7,9 @@
 
 - IDE는 Android Studio 사용, assets/*는 별도보관
 
-- [유튜브 링크](https://www.youtube.com/watch?v=ueHWaKd566g)
+- 유튜브 [링크]([https://www.youtube.com/watch?v=ueHWaKd566g](https://youtu.be/ueHWaKd566g))
 
-- [간단 기술문서 링크](https://github.com/user-attachments/files/24400213/asdfsdaf.pdf)
+- 간단 기술문서 [링크](https://github.com/user-attachments/files/24400213/asdfsdaf.pdf)
 
 ## License & Copyright
 This project is for educational and portfolio purposes only.
